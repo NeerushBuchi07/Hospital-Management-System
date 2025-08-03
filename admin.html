@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal | MediCare</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="admin-dashboard">
+    <!-- Admin-Specific Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Medi<span>Care</span> <span class="admin-badge">Admin</span></div>
+                <ul class="nav-links">
+                    <li><a href="admin.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="admin-users.html"><i class="fas fa-users-cog"></i> User Management</a></li>
+                    <li><a href="admin-audit.html"><i class="fas fa-clipboard-list"></i> Audit Logs</a></li>
+                    <li><a href="auth.html" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Admin Dashboard -->
+    <main class="container">
+        <!-- Quick Stats -->
+        <div class="admin-stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon bg-blue">
+                    <i class="fas fa-user-injured"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Patients Today</h3>
+                    <p class="stat-value">42</p>
+                    <a href="patients.html" class="stat-link">View All <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- More stat cards... -->
+        </div>
+
+        <!-- Admin Control Panels -->
+        <div class="admin-panels">
+            <!-- User Management Panel -->
+            <div class="admin-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-users-cog"></i> User Management</h2>
+                    <button class="btn btn-sm" onclick="location.href='admin-users.html'">
+                        Manage All
+                    </button>
+                </div>
+                <div class="recent-users">
+                    <div class="user-card">
+                        <div class="user-avatar bg-purple">DR</div>
+                        <div class="user-info">
+                            <h4>Dr. Smith</h4>
+                            <p>Cardiology • Last active: 2h ago</p>
+                        </div>
+                        <div class="user-actions">
+                            <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                            <button class="btn-icon danger"><i class="fas fa-lock"></i></button>
+                        </div>
+                    </div>
+                    <!-- More recent users... -->
+                </div>
+            </div>
+
+            <!-- System Alerts Panel -->
+            <div class="admin-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-bell"></i> System Alerts</h2>
+                </div>
+                <div class="alert-list">
+                    <div class="alert-item critical">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div class="alert-content">
+                            <h4>Server Storage 90% Full</h4>
+                            <p>Database server running low on disk space</p>
+                        </div>
+                        <button class="btn-icon"><i class="fas fa-times"></i></button>
+                    </div>
+                    <!-- More alerts... -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+            <div class="action-grid">
+                <button class="action-card" onclick="location.href='admin-backup.html'">
+                    <i class="fas fa-database"></i>
+                    <span>Run System Backup</span>
+                </button>
+                <button class="action-card" onclick="location.href='admin-reports.html'">
+                    <i class="fas fa-file-export"></i>
+                    <span>Generate Reports</span>
+                </button>
+                <!-- More actions... -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Admin Footer -->
+    <footer class="admin-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>Logged in as: <strong>xxxxxxxx</strong></p>
+                <p>Last login: xxxxxxx</p>
+                <p class="system-version">v4.2.1 • © 2023 MediCare Hospital</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
