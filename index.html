@@ -4,242 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MediCare Hospital - Home</title>
-    <style>
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f9ff;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        /* Header Styles */
-        header {
-            background-color: #005b96;
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-        
-        .logo span {
-            color: #4dabf7;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 2rem;
-        }
-        
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav-links a:hover {
-            color: #4dabf7;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: #4dabf7;
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background-color 0.3s;
-        }
-        
-        .btn:hover {
-            background-color: #339af0;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0, 91, 150, 0.8), rgba(0, 91, 150, 0.8)), 
-                        url('hospital-hero.jpg') center/cover;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: white;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .emergency {
-            background-color: #ff6b6b;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 5px;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 1rem;
-        }
-        
-        /* Services Section */
-        .services {
-            padding: 5rem 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: #005b96;
-            margin-bottom: 1rem;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .service-card i {
-            font-size: 3rem;
-            color: #4dabf7;
-            margin-bottom: 1.5rem;
-        }
-        
-        .service-card h3 {
-            margin-bottom: 1rem;
-            color: #005b96;
-        }
-        
-        /* Quick Links */
-        .quick-links {
-            background-color: #e7f5ff;
-            padding: 3rem 0;
-            text-align: center;
-        }
-        
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .link-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        
-        /* Footer */
-        footer {
-            background-color: #005b96;
-            color: white;
-            padding: 3rem 0 1rem;
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-column h3 {
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 0.8rem;
-        }
-        
-        .footer-column a {
-            color: #b3d9ff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-column a:hover {
-            color: white;
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -249,7 +14,7 @@
             <nav>
                 <div class="logo">Medi<span>Care</span></div>
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="appointments.html">Appointments</a></li>
                     <li><a href="doctors.html">Doctors</a></li>
                     <li><a href="services.html">Services</a></li>
@@ -267,74 +32,56 @@
                 <h1>Your Health Is Our Priority</h1>
                 <p>Providing exceptional healthcare services with compassion and cutting-edge technology for over 25 years.</p>
                 <a href="appointments.html" class="btn">Book an Appointment</a>
-                <div class="emergency">
+                <button class="btn btn-danger mt-2">
                     <i class="fas fa-phone-alt"></i> Emergency: 911
-                </div>
+                </button>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section class="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Services</h2>
-                <p>Comprehensive healthcare services for all your needs</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-heartbeat"></i>
+    <section class="container">
+        <div class="card text-center">
+            <h2 class="card-title">Our Services</h2>
+            <p>Comprehensive healthcare services for all your needs</p>
+            
+            <div class="grid-container mt-3">
+                <div class="card">
+                    <i class="fas fa-heartbeat fa-3x" style="color: #4dabf7; margin-bottom: 1rem;"></i>
                     <h3>Cardiology</h3>
-                    <p>Advanced cardiac care with state-of-the-art diagnostic equipment and expert cardiologists.</p>
+                    <p>Advanced cardiac care with state-of-the-art diagnostic equipment.</p>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-bone"></i>
+                <div class="card">
+                    <i class="fas fa-bone fa-3x" style="color: #4dabf7; margin-bottom: 1rem;"></i>
                     <h3>Orthopedics</h3>
-                    <p>Specialized care for bones, joints, and muscles with minimally invasive techniques.</p>
+                    <p>Specialized care for bones, joints, and muscles.</p>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-brain"></i>
+                <div class="card">
+                    <i class="fas fa-brain fa-3x" style="color: #4dabf7; margin-bottom: 1rem;"></i>
                     <h3>Neurology</h3>
-                    <p>Comprehensive neurological care for disorders of the brain and nervous system.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-baby"></i>
-                    <h3>Pediatrics</h3>
-                    <p>Child-friendly environment with specialized pediatric care for infants to adolescents.</p>
+                    <p>Comprehensive neurological care for brain disorders.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Quick Links Section -->
-    <section class="quick-links">
-        <div class="container">
-            <h2>Quick Access</h2>
-            <div class="links-grid">
-                <div class="link-card">
-                    <a href="appointments.html">
-                        <i class="fas fa-calendar-check"></i>
-                        <h3>Book Appointment</h3>
-                    </a>
-                </div>
-                <div class="link-card">
-                    <a href="doctors.html">
-                        <i class="fas fa-user-md"></i>
-                        <h3>Find a Doctor</h3>
-                    </a>
-                </div>
-                <div class="link-card">
-                    <a href="patients.html">
-                        <i class="fas fa-procedures"></i>
-                        <h3>Patient Portal</h3>
-                    </a>
-                </div>
-                <div class="link-card">
-                    <a href="billing.html">
-                        <i class="fas fa-file-invoice-dollar"></i>
-                        <h3>Pay Bill Online</h3>
-                    </a>
-                </div>
+    <!-- Quick Links -->
+    <section class="container">
+        <div class="card">
+            <h2 class="card-title text-center">Quick Access</h2>
+            <div class="grid-container">
+                <a href="appointments.html" class="card text-center">
+                    <i class="fas fa-calendar-check fa-2x" style="color: #4dabf7; margin-bottom: 1rem;"></i>
+                    <h3>Book Appointment</h3>
+                </a>
+                <a href="doctors.html" class="card text-center">
+                    <i class="fas fa-user-md fa-2x" style="color: #4dabf7; margin-bottom: 1rem;"></i>
+                    <h3>Find a Doctor</h3>
+                </a>
+                <a href="patients.html" class="card text-center">
+                    <i class="fas fa-procedures fa-2x" style="color: #4dabf7; margin-bottom: 1rem;"></i>
+                    <h3>Patient Portal</h3>
+                </a>
             </div>
         </div>
     </section>
@@ -342,51 +89,41 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
+            <div class="grid-container">
+                <div>
                     <h3>MediCare Hospital</h3>
-                    <p>123 Health Avenue<br>Medical City, MC 12345<br>Phone: (123) 456-7890</p>
+                    <p>123 Health Avenue<br>Medical City, MC 12345</p>
                 </div>
-                <div class="footer-column">
+                <div>
                     <h3>Quick Links</h3>
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
                         <li><a href="services.html">Services</a></li>
-                        <li><a href="doctors.html">Our Doctors</a></li>
+                        <li><a href="doctors.html">Doctors</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h3>Patient Care</h3>
-                    <ul>
-                        <li><a href="appointments.html">Appointments</a></li>
-                        <li><a href="billing.html">Billing</a></li>
-                        <li><a href="prescriptions.html">Prescriptions</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Connect With Us</h3>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
+                <div>
+                    <h3>Contact</h3>
+                    <p>Phone: (123) 456-7890<br>Email: info@medicare.com</p>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2023 MediCare Hospital. All Rights Reserved.</p>
+                <br>
+            <div class="footer-column">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <br>
+                <br>
+                <div class="copyright">
+                    <p>&copy; 2023 MediCare Hospital. All Rights Reserved.</p>
+                </div>
             </div>
-        </div>
     </footer>
 
-    <script>
-        // Simple JavaScript for interactive elements
-        document.addEventListener('DOMContentLoaded', function() {
-            // You can add interactive functionality here
-            console.log('Hospital Management System loaded');
-        });
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
