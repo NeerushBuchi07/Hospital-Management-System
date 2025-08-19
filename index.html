@@ -3,9 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediCare Hospital - Home</title>
+    <title>MediCare Hospital - Login</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 20% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .modal-icon {
+            color: #4CAF50;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-btn {
+            background-color: #005b96;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        
+        .modal-btn:hover {
+            background-color: #004578;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -14,77 +59,96 @@
             <nav>
                 <div class="logo">Medi<span>Care</span></div>
                 <ul class="nav-links">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="appointments.html">Appointments</a></li>
-                    <li><a href="doctors.html">Doctors</a></li>
-                    <li><a href="services.html">Services</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a href="auth.html" class="btn">Login</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Your Health Is Our Priority</h1>
-                <p>Providing exceptional healthcare services with compassion and cutting-edge technology for over 25 years.</p>
-                <a href="appointments.html" class="btn">Book an Appointment</a>
-                <button class="btn btn-danger mt-2">
-                    <i class="fas fa-phone-alt"></i> Emergency: 911
-                </button>
+    <!-- Auth Container -->
+    <div class="container">
+        <div class="auth-container">
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="login">Login</button>
+                <button class="tab-btn" data-tab="signup">Register</button>
             </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="container">
-        <div class="card text-center">
-            <h2 class="card-title">Our Services</h2>
-            <p>Comprehensive healthcare services for all your needs</p>
             
-            <div class="grid-container mt-3">
-                <div class="card">
-                    <i class="fas fa-heartbeat fa-3x" style="color: #4dabf7; margin-bottom: 1rem;"></i>
-                    <h3>Cardiology</h3>
-                    <p>Advanced cardiac care with state-of-the-art diagnostic equipment.</p>
+            <!-- Login Tab -->
+            <div id="login" class="tab-content active">
+                <h2 style="text-align: center; margin-bottom: 1.5rem; color: #005b96;">Login to Your Account</h2>
+                
+                <div class="user-types">
+                    <button class="user-type active" data-type="patient">Patient</button>
+                    <button class="user-type" data-type="doctor">Doctor</button>
+                    <button class="user-type" data-type="admin">Admin</button>
                 </div>
-                <div class="card">
-                    <i class="fas fa-bone fa-3x" style="color: #4dabf7; margin-bottom: 1rem;"></i>
-                    <h3>Orthopedics</h3>
-                    <p>Specialized care for bones, joints, and muscles.</p>
-                </div>
-                <div class="card">
-                    <i class="fas fa-brain fa-3x" style="color: #4dabf7; margin-bottom: 1rem;"></i>
-                    <h3>Neurology</h3>
-                    <p>Comprehensive neurological care for brain disorders.</p>
-                </div>
+                
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="submit-btn">Login</button>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <a href="#forgot-password">Forgot Password?</a>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Signup Tab (Patient Only) -->
+            <div id="signup" class="tab-content">
+                <h2 style="text-align: center; margin-bottom: 1.5rem; color: #005b96;">Patient Registration</h2>
+                
+                <p style="text-align: center; margin-bottom: 1.5rem;">Only patients can register for an account. Doctors and administrators must be registered by the system.</p>
+                
+                <form id="signup-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" class="form-control" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signup-phone">Phone Number</label>
+                        <input type="tel" id="signup-phone" class="form-control" placeholder="Enter your phone number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" class="form-control" placeholder="Create a password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signup-confirm">Confirm Password</label>
+                        <input type="password" id="signup-confirm" class="form-control" placeholder="Confirm your password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="submit-btn">Create Account</button>
+                    </div>
+                    
+                    <div class="form-footer">
+                        Already have an account? <a onclick="switchToLoginTab()" class="switch-tab">Login here</a>
+                    </div>
+                </form>
             </div>
         </div>
-    </section>
-
-    <!-- Quick Links -->
-    <section class="container">
-        <div class="card">
-            <h2 class="card-title text-center">Quick Access</h2>
-            <div class="grid-container">
-                <a href="appointments.html" class="card text-center">
-                    <i class="fas fa-calendar-check fa-2x" style="color: #4dabf7; margin-bottom: 1rem;"></i>
-                    <h3>Book Appointment</h3>
-                </a>
-                <a href="doctors.html" class="card text-center">
-                    <i class="fas fa-user-md fa-2x" style="color: #4dabf7; margin-bottom: 1rem;"></i>
-                    <h3>Find a Doctor</h3>
-                </a>
-                <a href="patients.html" class="card text-center">
-                    <i class="fas fa-procedures fa-2x" style="color: #4dabf7; margin-bottom: 1rem;"></i>
-                    <h3>Patient Portal</h3>
-                </a>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -124,6 +188,139 @@
             </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Registration Successful!</h3>
+            <p>Your patient account has been created successfully.</p>
+            <button class="modal-btn" id="modalOkBtn">OK</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab Switching
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tabId = btn.getAttribute('data-tab');
+                    
+                    // Update active tab button
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    // Update active tab content
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // User Type Switching
+            const userTypes = document.querySelectorAll('.user-type');
+            
+            userTypes.forEach(type => {
+                type.addEventListener('click', () => {
+                    userTypes.forEach(t => t.classList.remove('active'));
+                    type.classList.add('active');
+                });
+            });
+            
+            // Registration Form Submission
+            document.getElementById('signup-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const password = document.getElementById('signup-password').value;
+                const confirmPassword = document.getElementById('signup-confirm').value;
+                
+                // Validate passwords match
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match!');
+                    return;
+                }
+                
+                // Show success modal
+                document.getElementById('successModal').style.display = 'block';
+                
+                // Clear form
+                this.reset();
+            });
+            
+            // Login Form Submission
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const userType = document.querySelector('.user-type.active').getAttribute('data-type');
+                
+                if (userType === 'patient') {
+                    // Redirect to patient dashboard
+                    window.location.href = 'patient-dashboard.html';
+                } else {
+                    // For doctor/admin, show alert (to be implemented with backend)
+                    alert(`${userType.charAt(0).toUpperCase() + userType.slice(1)} login functionality will be implemented with backend`);
+                }
+            });
+            
+            // Modal OK Button
+            document.getElementById('modalOkBtn').addEventListener('click', function() {
+                // Hide modal
+                document.getElementById('successModal').style.display = 'none';
+                
+                // Switch to login tab
+                document.querySelector('.tab-btn[data-tab="login"]').click();
+            });
+        });
+
+        function switchToLoginTab() {
+            // Get all tab buttons and contents
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            // Update active tab button
+            tabBtns.forEach(b => b.classList.remove('active'));
+            document.querySelector('.tab-btn[data-tab="login"]').classList.add('active');
+            
+            // Update active tab content
+            tabContents.forEach(content => content.classList.remove('active'));
+            document.getElementById('login').classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Existing tab switching code remains the same
+            
+            // Update the click handler for the "Login here" link in the form footer
+            document.querySelector('.switch-tab').addEventListener('click', function(e) {
+                e.preventDefault();
+                switchToLoginTab();
+            });
+            
+            // Rest of your existing JavaScript remains the same
+        });
+
+
+        <!-- In the login form submission handler in login.html -->
+        
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const userType = document.querySelector('.user-type.active').getAttribute('data-type');
+        
+        // Redirect based on user type
+        switch(userType) {
+            case 'patient':
+                window.location.href = 'patient-dashboard.html';
+                break;
+            case 'doctor':
+                window.location.href = 'doctor-dashboard.html';
+                break;
+            case 'admin':
+                window.location.href = 'admin-dashboard.html';
+                break;
+        }
+    });
+    </script>
 </body>
 </html>
