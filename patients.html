@@ -82,5 +82,102 @@
                 </div>
             </div>
     </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add patient button functionality
+        document.getElementById('add-patient').addEventListener('click', function() {
+            // In a real application, this would open a patient form modal
+            const patientForm = `
+                <div class="modal" style="display: block;">
+                    <div class="modal-content">
+                        <h2>Add New Patient</h2>
+                        <form id="patient-form">
+                            <div class="form-group">
+                                <label for="patient-name">Full Name</label>
+                                <input type="text" id="patient-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="patient-dob">Date of Birth</label>
+                                <input type="date" id="patient-dob" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="patient-contact">Contact Number</label>
+                                <input type="tel" id="patient-contact" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn">Save Patient</button>
+                                <button type="button" class="btn btn-danger" id="cancel-patient">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+            
+            // Create and show modal
+            const modalContainer = document.createElement('div');
+            modalContainer.innerHTML = patientForm;
+            document.body.appendChild(modalContainer);
+            
+            // Form submission
+            document.getElementById('patient-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Patient added successfully (would connect to backend in real application)');
+                document.body.removeChild(modalContainer);
+            });
+            
+            // Cancel button
+            document.getElementById('cancel-patient').addEventListener('click', function() {
+                document.body.removeChild(modalContainer);
+            });
+        });
+        
+        // Simulate loading patients after a delay
+        setTimeout(() => {
+            const patients = [
+                { name: 'John Doe', dob: '1985-05-15', condition: 'Hypertension', status: 'Stable' },
+                { name: 'Jane Smith', dob: '1990-12-22', condition: 'Diabetes', status: 'Monitoring' }
+            ];
+            
+            if (patients.length > 0) {
+                document.querySelector('.empty-state').style.display = 'none';
+                
+                // Create patients table
+                const patientsTable = `
+                    <div class="card">
+                        <h2>Patient List</h2>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Date of Birth</th>
+                                    <th>Condition</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${patients.map(patient => `
+                                    <tr>
+                                        <td>${patient.name}</td>
+                                        <td>${patient.dob}</td>
+                                        <td>${patient.condition}</td>
+                                        <td><span class="status-badge">${patient.status}</span></td>
+                                        <td>
+                                            <button class="btn-icon view-patient"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon edit-patient"><i class="fas fa-edit"></i></button>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+                
+                document.querySelector('main').insertAdjacentHTML('beforeend', patientsTable);
+            }
+        }, 1500);
+    });
+</script>
 </body>
+
 </html>
