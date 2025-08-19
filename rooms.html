@@ -114,5 +114,42 @@
                 </div>
             </div>
     </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Room filtering functionality
+        const wardFilter = document.getElementById('ward-filter');
+        const roomCards = document.querySelectorAll('.room-card');
+        
+        wardFilter.addEventListener('change', function() {
+            const selectedWard = this.value;
+            
+            roomCards.forEach(card => {
+                if (selectedWard === 'all' || card.querySelector('p').textContent.toLowerCase().includes(selectedWard)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+        
+        // Room assignment functionality
+        document.querySelectorAll('.room-card .btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const roomNumber = this.closest('.room-card').querySelector('h3').textContent;
+                const wardType = this.closest('.room-card').querySelector('p').textContent;
+                
+                if (confirm(`Assign patient to ${roomNumber} (${wardType})?`)) {
+                    // In a real application, this would open a patient selection modal
+                    alert(`Patient will be assigned to ${roomNumber}`);
+                    // Change room status to occupied
+                    this.closest('.room-card').classList.remove('vacant');
+                    this.closest('.room-card').classList.add('occupied');
+                    this.textContent = 'View Patient';
+                }
+            });
+        });
+    });
+</script>
 </body>
+
 </html>
