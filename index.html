@@ -321,6 +321,38 @@
                 break;
         }
     });
+    document.addEventListener('DOMContentLoaded', function() {
+        // Emergency button functionality
+        document.querySelector('.btn-danger').addEventListener('click', function() {
+            if (confirm('Call emergency services (911)?')) {
+                window.location.href = 'tel:911';
+            }
+        });
+        
+        // Service card hover effects
+        const serviceCards = document.querySelectorAll('.card');
+        serviceCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+            });
+        });
+        
+        // Quick access cards functionality
+        document.querySelectorAll('.grid-container a.card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = this.getAttribute('href');
+                window.location.href = target;
+            });
+        });
+    });
     </script>
 </body>
 </html>
+
