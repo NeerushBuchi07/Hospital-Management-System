@@ -113,5 +113,74 @@
             </div>
         </div>
     </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Simulate admin data loading
+        setTimeout(() => {
+            // Update user info
+            document.querySelector('.footer-content strong').textContent = 'admin@medicare.com';
+            document.querySelector('.footer-content p:nth-child(2)').textContent = 
+                'Last login: ' + new Date().toLocaleString();
+            
+            // Add more sample users
+            const users = [
+                { name: 'Dr. Wilson', role: 'Radiology', status: 'active', lastActive: '5h ago' },
+                { name: 'Dr. Brown', role: 'Surgery', status: 'active', lastActive: '1h ago' },
+                { name: 'Nurse Jane', role: 'ICU', status: 'inactive', lastActive: '2 days ago' }
+            ];
+            
+            const userContainer = document.querySelector('.recent-users');
+            users.forEach(user => {
+                const userCard = document.createElement('div');
+                userCard.className = 'user-card';
+                userCard.innerHTML = `
+                    <div class="user-avatar bg-blue">${user.name.split(' ').map(n => n[0]).join('')}</div>
+                    <div class="user-info">
+                        <h4>${user.name}</h4>
+                        <p>${user.role} • Last active: ${user.lastActive}</p>
+                    </div>
+                    <div class="user-actions">
+                        <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                        <button class="btn-icon ${user.status === 'active' ? 'danger' : ''}">
+                            <i class="fas ${user.status === 'active' ? 'fa-lock' : 'fa-unlock'}"></i>
+                        </button>
+                    </div>
+                `;
+                userContainer.appendChild(userCard);
+            });
+            
+            // Add more alerts
+            const alerts = [
+                { type: 'warning', message: 'Scheduled maintenance tonight at 2 AM', details: 'System will be unavailable for 30 minutes' },
+                { type: 'info', message: 'New software update available', details: 'Version 4.2.2 ready for installation' }
+            ];
+            
+            const alertContainer = document.querySelector('.alert-list');
+            alerts.forEach(alert => {
+                const alertItem = document.createElement('div');
+                alertItem.className = `alert-item ${alert.type}`;
+                alertItem.innerHTML = `
+                    <i class="fas fa-${alert.type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                    <div class="alert-content">
+                        <h4>${alert.message}</h4>
+                        <p>${alert.details}</p>
+                    </div>
+                    <button class="btn-icon"><i class="fas fa-times"></i></button>
+                `;
+                alertContainer.appendChild(alertItem);
+            });
+            
+            // Add action card functionality
+            document.querySelectorAll('.action-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const action = this.querySelector('span').textContent;
+                    alert(`${action} functionality will be implemented with backend`);
+                });
+            });
+            
+        }, 500);
+    });
+</script>
 </body>
+
 </html>
