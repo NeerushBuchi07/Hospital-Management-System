@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard | MediCare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #005b96;
+            --secondary: #e1f0fa;
+            --accent: #4CAF50;
+            --text: #333;
+            --light: #f8f9fa;
+            --dark: #343a40;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text);
+        }
+        
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background: var(--primary);
+            color: white;
+            padding: 20px 0;
+        }
+        
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .sidebar-nav {
+            margin-top: 20px;
+        }
+        
+        .nav-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .nav-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Forms */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .empty-state i {
+            font-size: 48px;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+        
+        /* Appointments Table (hidden when empty) */
+        .appointments-table {
+            display: none;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            font-weight: 600;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Medi<span>Care</span></h2>
+                <p>Patient Dashboard</p>
+            </div>
+            
+            <div class="sidebar-nav">
+                <div class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </div>
+                <div class="nav-item" data-section="appointments">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Appointments</span>
+                </div>
+                <div class="nav-item" data-section="prescriptions">
+                    <i class="fas fa-prescription-bottle-alt"></i>
+                    <span>Prescriptions</span>
+                </div>
+                <div class="nav-item" data-section="medical-records">
+                    <i class="fas fa-file-medical"></i>
+                    <span>Medical Records</span>
+                </div>
+                <div class="nav-item" data-section="profile">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </div>
+                <div class="nav-item" data-section="logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1 id="greeting-message">Welcome back!</h1>
+                <div class="user-info">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" id="user-avatar">
+                    <span id="user-name">Loading...</span>
+                </div>
+            </div>
+            
+            <!-- Dashboard Content -->
+            <div id="dashboard-section" class="content-section active">
+                <div class="empty-state">
+                    <i class="fas fa-user-clock"></i>
+                    <h3>No Recent Activity</h3>
+                    <p>Your dashboard will display important information once you have appointments or medical records.</p>
+                </div>
+            </div>
+            
+            <!-- Appointments Content -->
+            <div id="appointments-section" class="content-section">
+                <div class="empty-state">
+                    <i class="fas fa-calendar-times"></i>
+                    <h3>No Appointments Scheduled</h3>
+                    <p>You currently don't have any upcoming appointments.</p>
+                    <button class="btn btn-primary" id="new-appointment-btn">Book New Appointment</button>
+                </div>
+                
+                <div class="appointments-table" id="appointments-table">
+                    <!-- Will be populated from database -->
+                </div>
+            </div>
+            
+            <!-- New Appointment Form -->
+            <div id="new-appointment-form" class="content-section form-container" style="display: none;">
+                <h2>Book New Appointment</h2>
+                <form id="appointment-form">
+                    <div class="form-group">
+                        <label for="appointment-type">Appointment Type</label>
+                        <select id="appointment-type" class="form-control" required>
+                            <option value="">Select type</option>
+                            <option value="general">General Checkup</option>
+                            <option value="followup">Follow-up Visit</option>
+                            <option value="specialist">Specialist Consultation</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="appointment-date">Preferred Date</label>
+                        <input type="date" id="appointment-date" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="appointment-time">Preferred Time</label>
+                        <input type="time" id="appointment-time" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="appointment-notes">Notes</label>
+                        <textarea id="appointment-notes" class="form-control" rows="3"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Book Appointment</button>
+                    <button type="button" class="btn" id="cancel-appointment-btn">Cancel</button>
+                </form>
+            </div>
+            
+            <!-- Prescriptions Content -->
+            <div id="prescriptions-section" class="content-section">
+                <div class="empty-state">
+                    <i class="fas fa-prescription-bottle"></i>
+                    <h3>No Active Prescriptions</h3>
+                    <p>Your current prescriptions will appear here when prescribed by your doctor.</p>
+                </div>
+            </div>
+            
+            <!-- Medical Records Content -->
+            <div id="medical-records-section" class="content-section">
+                <div class="empty-state">
+                    <i class="fas fa-file-medical-alt"></i>
+                    <h3>No Medical Records Available</h3>
+                    <p>Your medical records will be accessible here after your first visit.</p>
+                </div>
+            </div>
+            
+            <!-- Profile Content -->
+            <div id="profile-section" class="content-section form-container">
+                <h2>My Profile</h2>
+                <form id="profile-form">
+                    <div class="form-group">
+                        <label for="profile-name">Full Name</label>
+                        <input type="text" id="profile-name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profile-email">Email</label>
+                        <input type="email" id="profile-email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profile-phone">Phone Number</label>
+                        <input type="tel" id="profile-phone" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profile-dob">Date of Birth</label>
+                        <input type="date" id="profile-dob" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profile-address">Address</label>
+                        <textarea id="profile-address" class="form-control" rows="3" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                </form>
+            </div>
+            
+            <!-- Logout Confirmation -->
+            <div id="logout-section" class="content-section" style="text-align: center;">
+                <div class="empty-state">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <h3>Logout</h3>
+                    <p>Are you sure you want to logout?</p>
+                    <button class="btn btn-primary" id="confirm-logout">Yes, Logout</button>
+                    <button class="btn" id="cancel-logout">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate user data (in real app, this would come from backend)
+            const userData = {
+                name: "John Doe",
+                email: "john.doe@example.com",
+                phone: "+1 (555) 123-4567",
+                dob: "1985-06-15",
+                address: "123 Main St, Anytown, USA"
+            };
+            
+            // Set user data in UI
+            document.getElementById('user-name').textContent = userData.name;
+            document.getElementById('profile-name').value = userData.name;
+            document.getElementById('profile-email').value = userData.email;
+            document.getElementById('profile-phone').value = userData.phone;
+            document.getElementById('profile-dob').value = userData.dob;
+            document.getElementById('profile-address').value = userData.address;
+            
+            // Set greeting based on time of day
+            const hour = new Date().getHours();
+            const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
+            document.getElementById('greeting-message').textContent = `${greeting}, ${userData.name.split(' ')[0]}!`;
+            
+            // Sidebar navigation
+            const navItems = document.querySelectorAll('.nav-item');
+            const contentSections = document.querySelectorAll('.content-section');
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-section');
+                    
+                    // Handle logout separately
+                    if (sectionId === 'logout') {
+                        showSection('logout-section');
+                        return;
+                    }
+                    
+                    // Update active nav item
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding section
+                    showSection(`${sectionId}-section`);
+                });
+            });
+            
+            function showSection(sectionId) {
+                contentSections.forEach(section => section.classList.remove('active'));
+                document.getElementById(sectionId).classList.add('active');
+            }
+            
+            // New appointment button
+            document.getElementById('new-appointment-btn').addEventListener('click', function() {
+                showSection('new-appointment-form');
+            });
+            
+            // Cancel appointment button
+            document.getElementById('cancel-appointment-btn').addEventListener('click', function() {
+                showSection('appointments-section');
+            });
+            
+            // Appointment form submission
+            document.getElementById('appointment-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Appointment booking functionality will be implemented with backend');
+                showSection('appointments-section');
+            });
+            
+            // Profile form submission
+            document.getElementById('profile-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Profile update functionality will be implemented with backend');
+            });
+            
+            // Logout buttons
+            document.getElementById('confirm-logout').addEventListener('click', function() {
+                // In real app, this would call logout API
+                window.location.href = 'login.html';
+            });
+            
+            document.getElementById('cancel-logout').addEventListener('click', function() {
+                showSection('dashboard-section');
+                document.querySelector('.nav-item[data-section="dashboard"]').click();
+            });
+        });
+    </script>
+</body>
+</html>
