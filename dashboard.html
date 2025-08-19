@@ -149,5 +149,110 @@
                 </div>
             </div>
     </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set user name
+        document.getElementById('user-name').textContent = "Dr. Smith";
+        
+        // Dashboard tab navigation
+        const sectionBtns = document.querySelectorAll('.section-btn');
+        const sections = document.querySelectorAll('.dashboard-section');
+        
+        sectionBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons and sections
+                sectionBtns.forEach(b => b.classList.remove('active'));
+                sections.forEach(s => s.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Show corresponding section
+                const sectionId = this.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+        
+        // Quick action button
+        document.getElementById('quick-action').addEventListener('click', function() {
+            // In a real application, this might open a modal for quick actions
+            const actions = [
+                'Create New Appointment',
+                'Add Patient Record',
+                'Generate Report',
+                'View Schedule'
+            ];
+            
+            const action = prompt('Select an action:\n' + actions.map((a, i) => `${i+1}. ${a}`).join('\n'));
+            
+            if (action) {
+                alert(`You selected: ${actions[parseInt(action)-1] || 'Unknown action'}`);
+            }
+        });
+        
+        // Simulate loading data for different sections
+        setTimeout(() => {
+            // Load appointments section content
+            document.getElementById('appointments').innerHTML = `
+                <h2>Appointment Management</h2>
+                <div class="appointment-filters">
+                    <div class="filter-group">
+                        <label for="appointment-date">Date</label>
+                        <input type="date" id="appointment-date">
+                    </div>
+                    <div class="filter-group">
+                        <label for="appointment-status">Status</label>
+                        <select id="appointment-status">
+                            <option value="all">All</option>
+                            <option value="scheduled">Scheduled</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="empty-state">
+                    <i class="fas fa-calendar-plus"></i>
+                    <h3>No Appointments Found</h3>
+                    <p>Try adjusting your filters or create a new appointment.</p>
+                </div>
+            `;
+            
+            // Load patients section content
+            document.getElementById('patients').innerHTML = `
+                <h2>Patient Management</h2>
+                <div class="page-header">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search patients...">
+                        <button class="btn"><i class="fas fa-search"></i></button>
+                    </div>
+                    <button class="btn"><i class="fas fa-plus"></i> New Patient</button>
+                </div>
+                <div class="empty-state">
+                    <i class="fas fa-user-injured"></i>
+                    <h3>No Patients Found</h3>
+                    <p>Try searching with different terms or add a new patient.</p>
+                </div>
+            `;
+            
+            // Load reports section content
+            document.getElementById('reports').innerHTML = `
+                <h2>Reports & Analytics</h2>
+                <div class="grid-container">
+                    <div class="card">
+                        <h3><i class="fas fa-chart-line"></i> Monthly Statistics</h3>
+                        <p>View patient visits, revenue, and other metrics.</p>
+                        <button class="btn">Generate Report</button>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-procedures"></i> Treatment Reports</h3>
+                        <p>Analysis of treatments and outcomes.</p>
+                        <button class="btn">Generate Report</button>
+                    </div>
+                </div>
+            `;
+        }, 500);
+    });
+</script>
 </body>
+
 </html>
